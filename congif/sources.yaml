@@ -1,0 +1,66 @@
+sources:
+  arxiv:
+    name: "ArXiv"
+    base_url: "http://export.arxiv.org/api/query"
+    enabled: true
+
+    # Throughput target
+    rate_limit: 1
+    request_delay_seconds: 4
+    request_delay_jitter_seconds: 1
+
+    # Per-request page size
+    max_results_per_query: 1000
+
+    # Runtime limiter (needs pagination-aware collector)
+    pagination:
+      enabled: true
+      start: 0
+      page_size: 1000
+      max_requests: 10000
+      resume_from_checkpoint: true
+      checkpoint_every_requests: 10
+      checkpoint_file: "data/raw/arxiv/arxiv_checkpoint.json"
+
+    categories:
+    - astro-ph.*
+    - cond-mat.*
+    - cs.*
+    - econ.*
+    - eess.*
+    - gr-qc
+    - hep-ex
+    - hep-lat
+    - hep-ph
+    - hep-th
+    - math.*
+    - math-ph
+    - nlin.*
+    - nucl-ex
+    - nucl-th
+    - physics.*
+    - q-bio.*
+    - q-fin.*
+    - quant-ph
+    - stat.*
+
+  openalex:
+    name: "OpenAlex"
+    base_url: "https://api.openalex.org"
+    enabled: false
+    rate_limit: 10
+    max_results_per_query: 200
+
+  pubmed:
+    name: "PubMed"
+    base_url: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+    enabled: false
+    rate_limit: 3
+    max_results_per_query: 1000
+
+  semanticscholar:
+    name: "Semantic Scholar"
+    base_url: "https://api.semanticscholar.org/graph/v1"
+    enabled: false
+    rate_limit: 1
+    max_results_per_query: 100

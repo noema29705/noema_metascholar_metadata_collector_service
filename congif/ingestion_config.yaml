@@ -1,0 +1,22 @@
+ingestion:
+  data_dir: "./data/raw"
+  batch_size: 100
+  num_workers: 4
+  timeout: 30
+  retries: 3
+  retry_delay: 5  # seconds
+  log_level: "INFO"
+  
+storage:
+  format: "json"  # json or parquet
+  compression: "gzip"
+  
+processing:
+  normalize_text: true
+  remove_duplicates: true
+  min_content_length: 100  # chars
+  
+scheduling:
+  enabled: true
+  interval_hours: 24
+  run_on_startup: true
