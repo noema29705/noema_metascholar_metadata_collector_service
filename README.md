@@ -1,7 +1,8 @@
 # Research Paper Data Collector
 
+This repo is for collecting the required metadatas for MetaScholar.
 A Python data ingestion pipeline to collect research paper metadata from:
-- ArXiv
+- ArXiv 
 - OpenAlex
 - PubMed
 - Semantic Scholar
@@ -10,7 +11,8 @@ Current primary focus is large-scale ArXiv collection with pagination + checkpoi
 
 ## Project Structure
 
-```text
+```
+text
 run_collectors.py
 congif/
   ingestion_config.yaml
@@ -45,11 +47,32 @@ If you don't have a `requirements.txt`, use:
 pip install requests feedparser pyyaml
 ```
 
-## Configuration
+### Requirments.txt
+```
+PyYAML
+requests
+feedparser
+```
+The external dependencies required for this repo.
+
+## Setting up the venv space
+The whole project is set up in the venv space to localize the installations and resources of the project only to this repo.
+
+Use the following commands to set up the virtual environment and to to install the external dependencies:
+
+```
+python -m venv venv
+source venv/bin/activate
+pip install -r requirments.txt
+```
+
+This shall prepare the repo for running the codedbase.
+
+## Configuration of Source Collectors
 
 Main source configuration: `congif/sources.yaml`
 
-### ArXiv keys you should tune
+### ArXiv keys to be tuned
 
 - `rate_limit`: requests per second limit via rate limiter
 - `request_delay_seconds`: fixed sleep between paginated requests
@@ -63,6 +86,25 @@ Main source configuration: `congif/sources.yaml`
 - `pagination.checkpoint_every_requests`: save progress every N calls
 - `pagination.checkpoint_file`: checkpoint json path
 - `categories`: list of arXiv archives/categories to crawl
+
+### Semantic Scholar keys to be tuned
+
+### OpenAlex keys to be tuned
+
+### Pubmed keys to be tunned
+
+## Folders to setup
+```
+data/
+  raw/
+    arxiv/
+    openalex/
+    pubmed/
+    semanticscholar/
+```
+This folder needs to be setup in the root space for the collection of the json data.
+
+_(Note: Names can be changed but in that case we have to change the names at all the defined lcoations)_
 
 ## Run
 
@@ -117,24 +159,3 @@ Example:
 - ArXiv API/network reliability can vary; retries/checkpointing are important.
 - "All papers" can take many hours to days depending on throttle and scope.
 - Metadata collection is much faster than downloading full PDFs.
-
-## Common Issues
-
-### 1) Import errors with `colelctor` vs `collector`
-
-Use `ingestion.collector...` imports consistently.
-
-### 2) Config path typo
-
-Current folder is `congif/` (not `config/`). Keep paths consistent unless you rename project directories.
-
-### 3) Very short run time and low paper counts
-
-Usually means pagination is not active or `max_requests` is too low.
-
-## Next Improvements
-
-- Add deduplication by arXiv ID + DOI
-- Add robust retry/backoff policy
-- Add periodic flush to smaller chunk files
-- Add monitoring dashboard (counts, errors, throughput)
