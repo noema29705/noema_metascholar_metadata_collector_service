@@ -92,6 +92,18 @@ Main source configuration: `congif/sources.yaml`
 ### OpenAlex keys to be tuned
 
 ### Pubmed keys to be tunned
+- `rate_limit`: requests per second limit via rate limiter
+- `request_delay_seconds`: fixed sleep between paginated requests
+- `request_delay_jitter_seconds`: random jitter added to delay
+- `max_results_per_query`: page size per API call (typically up to 1000)
+- `pagination.enabled`: turn pagination on/off
+- `pagination.start`: initial offset
+- `pagination.page_size`: pagination page size
+- `pagination.max_requests`: hard cap per run
+- `pagination.resume_from_checkpoint`: continue from saved offset
+- `pagination.checkpoint_every_requests`: save progress every N calls
+- `pagination.checkpoint_file`: checkpoint json path
+- `categories`: list of arXiv archives/categories to crawl
 
 ## Folders to setup
 ```
