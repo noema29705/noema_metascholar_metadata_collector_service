@@ -47,9 +47,41 @@ sources:
   openalex:
     name: "OpenAlex"
     base_url: "https://api.openalex.org"
-    enabled: false
+    enabled: true
+    email: "ash007414@gmail.com"
     rate_limit: 10
+    request_delay_seconds: 0.1
     max_results_per_query: 200
+
+    pagination:
+      enabled: true
+      resume_from_checkpoint: true
+      checkpoint_file: "data/raw/openalex/openalex_checkpoint.json"
+
+    year_from: 1900
+    year_to: 2026
+
+    concepts:
+    - id: "C41008148"
+      name: "computer_science"
+    - id: "C154945302"
+      name: "artificial_intelligence"
+    - id: "C119857082"
+      name: "machine_learning"
+    - id: "C121332964"
+      name: "physics"
+    - id: "C33923547"
+      name: "mathematics"
+    - id: "C86803240"
+      name: "biology"
+    - id: "C71924100"
+      name: "medicine"
+    - id: "C185592680"
+      name: "chemistry"
+    - id: "C127413603"
+      name: "engineering"
+    - id: "C144024400"
+      name: "sociology"
 
   pubmed:
     name: "PubMed"

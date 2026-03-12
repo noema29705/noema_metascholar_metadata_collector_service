@@ -17,6 +17,8 @@ class Paper:
     venue: Optional[str] = None
     keywords: Optional[List[str]] = None
     doi: Optional[str] = None
+    categories: Optional[List[str]] = None
+    arxiv_id: Optional[str] = None
     
     def to_dict(self):
         return {
@@ -33,4 +35,6 @@ class Paper:
             'venue': self.venue,
             'keywords': self.keywords,
             'doi': self.doi,
+            'categories': self.categories,
+            'arxiv_id': self.arxiv_id,
         }

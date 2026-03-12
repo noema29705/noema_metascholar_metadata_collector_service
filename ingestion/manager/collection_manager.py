@@ -8,7 +8,7 @@ from ingestion.utils.logger import setup_logger
 import yaml
 
 class CollectionManager:
-    def __init__(self, config_file: str = "congif/sources.yaml"):
+    def __init__(self, config_file: str = "config/sources.yaml"):
         self.logger = setup_logger("manager")
         self.storage = StorageManager()
         
@@ -33,7 +33,8 @@ class CollectionManager:
         if self.sources_config.get('openalex', {}).get('enabled'):
             openalex_cfg = self.sources_config['openalex']
             collectors['openalex'] = OpenAlexCollector(
-                rate_limit=openalex_cfg.get('rate_limit', 10)
+                rate_limit=openalex_cfg.get('rate_limit', 10),
+                config = openalex_cfg,
             )
         
         if self.sources_config.get('pubmed', {}).get('enabled'):
