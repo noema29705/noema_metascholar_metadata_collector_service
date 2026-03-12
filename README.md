@@ -92,6 +92,16 @@ Main source configuration: `congif/sources.yaml`
 ### OpenAlex keys to be tuned
 
 ### Pubmed keys to be tunned
+- `rate_limit`: requests per second limit via rate limiter
+- `request_delay_seconds`: fixed sleep between paginated requests
+- `request_delay_jitter_seconds`: random jitter added to delay
+- `pagination.enabled`: turn pagination on/off
+- `pagination.start`: initial offset
+- `pagination.page_size`: number of PubMed IDs fetched per search request (recommended: 200)
+- `pagination.max_requests`: hard cap per run
+- `pagination.resume_from_checkpoint`: continue from saved offset
+- `pagination.checkpoint_every_requests`: save progress every N calls
+- `pagination.checkpoint_file`: checkpoint json path
 
 ## Folders to setup
 ```
