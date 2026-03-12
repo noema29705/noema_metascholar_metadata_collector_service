@@ -37,9 +37,10 @@ class CollectionManager:
             )
         
         if self.sources_config.get('pubmed', {}).get('enabled'):
-            pubmed_cfg = self.sources_config['pubmed']  
+            pubmed_cfg = self.sources_config['pubmed']
             collectors['pubmed'] = PubMedCollector(
-                rate_limit=self.sources_config['pubmed'].get('rate_limit', 3)
+                rate_limit=pubmed_cfg.get('rate_limit', 3),
+                config=pubmed_cfg
             )
         
         if self.sources_config.get('semanticscholar', {}).get('enabled'):
