@@ -13,10 +13,10 @@ class PubMedCollector(BaseCollector):
 
     def __init__(self, rate_limit: float = 3, config: Optional[Dict] = None):
         super().__init__("PubMed", rate_limit)
-        self.esearch_url =self.config.get("esearch_url")
-        self.efetch_url =self.config.get("efetch_url")
-        self.config = config or {}
-        pagination_cfg = self.config.get("pagination", {})
+        cfg = config or {}
+        self.esearch_url =cfg.get("esearch_url")
+        self.efetch_url =cfg.get("efetch_url")
+        pagination_cfg = cfg.get("pagination", {})
 
         self.pagination_enabled = pagination_cfg.get("enabled", True)
         self.default_start = int(pagination_cfg.get("start", 0))
