@@ -65,9 +65,17 @@ class CollectionManager:
                     categories = self.sources_config['arxiv'].get('categories', [])
                     max_results = self.sources_config[name].get('max_results_per_query', 1000)
                     papers = collector.search(query, max_results=max_results, categories=categories)
-                else:
-                    max_results = self.sources_config[name].get('max_results_per_query', 100)
-                    papers = collector.search(query, max_results=max_results)
+                elif name == 'pubmed':
+                    categories = self.sources_config['pubmed'].get('categories', [])
+                    max_results = self.sources_config[name].get('max_results_per_query', 1000)
+                    papers = []
+
+                    if categories:
+                        for category in categories:
+                            combined_query = f"{query} AND {category}"
+                            papers.extend(collector.search(combined_query, max_results=max_results))
+                    else:
+                        papers = collector.search(query, max_results=max_results)
                 
                 self.storage.save_papers(papers, name)
                 results[name] = {'count': len(papers), 'status': 'success'}
