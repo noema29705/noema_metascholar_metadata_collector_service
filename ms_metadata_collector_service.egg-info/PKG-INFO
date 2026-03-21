@@ -1,27 +1,82 @@
-# MetaScholar MetaData Collector
+Metadata-Version: 2.4
+Name: ms-metadata-collector-service
+Version: 0.1.0
+Summary: Reserach paper meta data collector service for MetaScholar AI
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: requests>=2.28.0
+Requires-Dist: feedparser>=6.0.0
 
-This repo is for collecting traw metadatas from different sources for training the MetaScholar Ai.
+# Research Paper Data Collector
 
-The CLI is set up to collect metadata from the following sources:
+This repo is for collecting the required metadatas for MetaScholar.
+A Python data ingestion pipeline to collect research paper metadata from:
 - ArXiv 
 - OpenAlex
 - PubMed
 - Semantic Scholar
 
-_(Current primary focus is large-scale ArXiv collection with pagination + checkpoint/resume for long-running crawls.)_
+Current primary focus is large-scale ArXiv collection with pagination + checkpoint/resume for long-running crawls.
+
+## Project Structure
+
+```
+text
+run_collectors.py
+congif/
+  ingestion_config.yaml
+  sources.yaml
+ingestion/
+  collector/
+  manager/
+  normalization/
+  queue/
+  scheduler/
+  storage/
+  utils/
+data/
+  raw/
+logs/
+```
 
 ## Requirements
 
-To install all the required packages just, run the command:
+- Python 3.10+
+- Internet access
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+If you don't have a `requirements.txt`, use:
+
+```bash
+pip install requests feedparser pyyaml
+```
+
+### Requirments.txt
+```
+PyYAML
+requests
+feedparser
+```
+The external dependencies required for this repo.
+
+## Setting up the venv space
+The whole project is set up in the venv space to localize the installations and resources of the project only to this repo.
+
+Use the following commands to set up the virtual environment and to to install the external dependencies:
 
 ```
-python3 -m venv venv
-pip install -e .
-hash -r
-ms-collector --help
+python -m venv venv
+source venv/bin/activate
+pip install -r requirments.txt
 ```
 
-These commands sets up the virtual environmetn space along with installing the required packages.
+This shall prepare the repo for running the codedbase.
 
 ## Configuration of Source Collectors
 

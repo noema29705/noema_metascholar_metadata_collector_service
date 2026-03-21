@@ -1,0 +1,2 @@
+[console_scripts]
+ms-collector = run_collectors:main

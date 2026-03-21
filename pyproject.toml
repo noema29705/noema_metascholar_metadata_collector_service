@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ms-metadata-collector-service"
+version = "0.1.0"
+description = "Reserach paper meta data collector service for MetaScholar AI"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "PyYAML>=6.0",
+    "requests>=2.28.0",
+    "feedparser>=6.0.0",
+]
+
+[project.scripts]
+ms-collector = "run_collectors:main"
+
+[tool.setuptools]
+py-modules = ["run_collectors"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ingestion*"]
+namespaces = true
